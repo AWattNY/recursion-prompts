@@ -98,10 +98,21 @@ var powerOfTwo = function(n) {
 
 // 9. Write a function that reverses a string.
 var reverse = function(string) {
+  
+  let l = string.length;
+  if ( l === 0 ) return '';
+  if ( l === 1 ) return string;
+  return string.charAt(l-1) + reverse(string.slice(1, l-1 )) + string.charAt(0);  
 };
 
 // 10. Write a function that determines if a string is a palindrome.
 var palindrome = function(string) {
+  var string = string.replace(/\s/g, '').toLowerCase();
+  let l = string.length;
+  if ( l === 0 ) return true;
+  if ( l === 1 ) return true;
+
+  return ( string.charAt(l-1) === string.charAt(0) ) && palindrome(string.slice(1, l-1 ));
 };
 
 // 11. Write a function that returns the remainder of x divided by y without using the
@@ -110,6 +121,21 @@ var palindrome = function(string) {
 // modulo(17,5) // 2
 // modulo(22,6) // 4
 var modulo = function(x, y) {
+  
+  
+  
+  if (( x === 0 ) && ( y === 0 )) return NaN;
+  if (( x === 0 ) || ( x === y )) return 0;
+  y = ( y > 0 ) ? y : -y;
+  if ( x > 0 ) {  
+  if ( x < y ) return x;
+  
+  return ( x - y >= y ) ? modulo(x - y, y) : (x - y) ;
+  }  else {  
+  if ( -x < y ) return x;
+  
+  return ( -x - y >= y ) ?  - modulo(-x - y, y) : - (-x - y) ;
+  }
 };
 
 // 12. Write a function that multiplies two numbers without using the * operator or
